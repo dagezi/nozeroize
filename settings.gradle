@@ -1,1 +1,1 @@
-include ':sampleApp'
+include ':sampleApp', ':vbw'
