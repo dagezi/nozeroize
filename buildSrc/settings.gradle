@@ -1,2 +1,0 @@
-include ':vbw'
-project(':vbw').projectDir = new File('../vbw')
