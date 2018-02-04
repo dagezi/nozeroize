@@ -37,4 +37,12 @@ class SubPathTest {
         assertEquals(0.0, emptySubPath.area, delta)
         assertEquals(2.5, subPath0.area, delta)
     }
+
+    @Test
+    fun reversed() {
+        val rSubPath = subPath0.reversed()
+        assertEquals(v2, rSubPath.startPoint)
+        assertEquals(vz, rSubPath.endPoint)
+        assertEquals(-2.5, rSubPath.area, delta)
+    }
 }

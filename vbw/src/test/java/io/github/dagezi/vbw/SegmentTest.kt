@@ -5,12 +5,12 @@ import org.junit.Test
 import org.junit.Assert.*
 
 class LineSegmentTest {
-    val z = Vector(0.0, 0.0)
-    val v0 = Vector(1.0, 2.0)
-    val v1 = Vector( 3.0, 1.0)
-    val seg = LineSegment(Directive.L, v0, v1)
+    private val z = Vector(0.0, 0.0)
+    private val v0 = Vector(1.0, 2.0)
+    private val v1 = Vector( 3.0, 1.0)
+    private val seg = LineSegment(Directive.L, v0, v1)
 
-    val delta = 1e-6
+    private val delta = 1e-6
 
     @Test
     fun area() {
@@ -22,5 +22,13 @@ class LineSegmentTest {
     @Test
     fun getBoundingRect() {
         assertEquals(Rect(v0, v1), seg.boundingRect)
+    }
+
+    @Test
+    fun reversed() {
+        val rSeg = seg.reversed()
+        assertEquals(v0, rSeg.end)
+        assertEquals(v1, rSeg.start)
+        assertEquals(2.5, rSeg.area(z), delta)
     }
 }

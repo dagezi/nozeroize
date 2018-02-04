@@ -32,4 +32,11 @@ class SubPath: Shape() {
     fun addSegment(segment: Segment) {
         segments.add(segment)
     }
+
+    fun reversed() : SubPath {
+        val newSubPath = SubPath()
+        segments.forEach({newSubPath.addSegment(it.reversed())})
+        newSubPath.segments.reverse()
+        return newSubPath
+    }
 }
