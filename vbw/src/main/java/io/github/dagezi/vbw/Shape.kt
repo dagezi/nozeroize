@@ -1,8 +1,14 @@
 package io.github.dagezi.vbw
 
 abstract class Shape {
-    abstract val isEmpty: Boolean
     abstract val boundingRect : Rect
+
+    open val isEmpty: Boolean
+        get() = boundingRect.isEmpty
+    open val isVoid: Boolean
+        get() = boundingRect.isVoid
+
+    // TODO: Declare area
 
     open fun intersects(other: Shape): Boolean =
             intersectedness(other) >= 0
