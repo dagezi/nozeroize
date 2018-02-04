@@ -6,6 +6,14 @@ class SubPath: Shape() {
     override val boundingRect: Rect
         get() = segments.fold(Rect.VOID, { acc, seg -> acc.union(seg.boundingRect)})
 
+    override val area: Double
+        get() = if (segments.isEmpty()) {
+            0.0
+        } else {
+            val p = startPoint
+            segments.sumByDouble { it.area(p) }
+        }
+
     val startPoint: Vector
         get() = segments.first().start
 

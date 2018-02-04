@@ -5,11 +5,13 @@ import org.junit.Before
 import org.junit.Test
 
 class SubPathTest {
-    val emptySubPath = SubPath()
-    val subPath0 = SubPath()
-    val vz = Vector(0.0, 0.0)
-    val v1 = Vector(1.0, 2.0)
-    val v2 = Vector(-2.0, 1.0)
+    private val emptySubPath = SubPath()
+    private val subPath0 = SubPath()
+    private val vz = Vector(0.0, 0.0)
+    private val v1 = Vector(1.0, 2.0)
+    private val v2 = Vector(-2.0, 1.0)
+
+    private val delta: Double = 1e-6
 
     @Before
     fun setup() {
@@ -28,5 +30,11 @@ class SubPathTest {
         assertEquals(v2, subPath0.endPoint)
         subPath0.close()
         assertEquals(vz, subPath0.endPoint)
+    }
+
+    @Test
+    fun area() {
+        assertEquals(0.0, emptySubPath.area, delta)
+        assertEquals(2.5, subPath0.area, delta)
     }
 }

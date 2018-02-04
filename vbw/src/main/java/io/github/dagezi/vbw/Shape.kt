@@ -8,7 +8,8 @@ abstract class Shape {
     open val isVoid: Boolean
         get() = boundingRect.isVoid
 
-    // TODO: Declare area
+    // Directed area: Positive if the shape is clockwise
+    abstract val area: Double
 
     open fun intersects(other: Shape): Boolean =
             intersectedness(other) >= 0

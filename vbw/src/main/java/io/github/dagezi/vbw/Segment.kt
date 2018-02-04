@@ -5,14 +5,16 @@ enum class Directive {
 }
 
 abstract class Segment(val dir: Directive, val start: Vector, val end: Vector) {
+    // Directed area: Positive if the path from p, start, end and back to p
+    // is clockwise.
     open fun area(p: Vector): Double =
             (start - p).cross(end - start) / 2.0
+
     open val boundingRect = Rect(start, end)
     // TODO: Declare reverse and toDirective
 }
 
-class LineSegment(dir: Directive, start: Vector, end: Vector) : Segment(dir, start, end) {
-}
+class LineSegment(dir: Directive, start: Vector, end: Vector) : Segment(dir, start, end)
 
 class QuadraticCurveSegment(dir: Directive, start: Vector, end: Vector, val c0: Vector) :
         Segment(dir, start, end) {

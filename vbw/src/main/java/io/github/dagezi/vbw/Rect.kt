@@ -62,6 +62,14 @@ class Rect(left: Double, top: Double, right: Double, bottom: Double) : Shape() {
                 String.format(Locale.US, "Rect(%f, %f, %f, %f)",
                 left, top, right, bottom)
 
+    val height: Double
+        get() = bottom - top
+    val width: Double
+        get() = right - left
+
+    override val area: Double
+        get() = height * width
+
     fun union(other: Rect): Rect =
             when {
                 isVoid ->
