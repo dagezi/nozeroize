@@ -21,22 +21,36 @@ class SubPath: Shape() {
         get() = segments.last().end
 
     // Make sure this is closed
-    fun close() {
+    fun close() : SubPath {
         if (!segments.isEmpty()) {
             if (startPoint != endPoint) {
-                addSegment(LineSegment(Directive.Z, endPoint, startPoint))
+                add(LineSegment(Directive.Z, endPoint, startPoint))
             }
         }
+        return this
     }
 
-    fun addSegment(segment: Segment) {
+    fun add(segment: Segment) : SubPath {
         segments.add(segment)
+        return this
     }
 
     fun reversed() : SubPath {
         val newSubPath = SubPath()
-        segments.forEach({newSubPath.addSegment(it.reversed())})
+        segments.forEach({newSubPath.add(it.reversed())})
         newSubPath.segments.reverse()
         return newSubPath
     }
+
+    fun toPathData() : String {
+        var b = StringBuilder()
+        segments.joinTo(b, separator = "", transform = {it.toPathData()})
+        return b.toString()
+    }
+
+    override fun equals(other: Any?): Boolean =
+            other is SubPath && segments.size == other.segments.size &&
+                    segments.zip(other.segments).all {it.first == it.second}
+
+    // Don't rely on hashCode!
 }

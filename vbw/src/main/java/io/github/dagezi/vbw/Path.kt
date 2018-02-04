@@ -9,8 +9,13 @@ class Path : Shape() {
     override val area: Double
         get() = subPaths.sumByDouble { it.area }
 
-    fun addSubPath(subPath: SubPath) {
+    fun add(subPath: SubPath) : Path {
         subPaths.add(subPath)
+        return this
     }
+
+    override fun equals(other: Any?): Boolean =
+            other is Path && subPaths.size == other.subPaths.size &&
+                    subPaths.zip(other.subPaths).all {it.first == it.second}
 }
 

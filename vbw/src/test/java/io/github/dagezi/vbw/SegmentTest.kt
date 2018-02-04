@@ -31,4 +31,14 @@ class LineSegmentTest {
         assertEquals(v1, rSeg.start)
         assertEquals(2.5, rSeg.area(z), delta)
     }
+
+    @Test
+    fun equals() {
+        val seg1 = LineSegment(Directive.L, v0, v1)
+        assertEquals(seg, seg1)
+
+        val seg2 = LineSegment(Directive.L, v0, z)
+        assertNotEquals(seg, seg2)
+        assertNotEquals(seg1, seg2)
+    }
 }

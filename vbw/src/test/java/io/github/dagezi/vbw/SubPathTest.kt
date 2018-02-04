@@ -6,18 +6,15 @@ import org.junit.Test
 
 class SubPathTest {
     private val emptySubPath = SubPath()
-    private val subPath0 = SubPath()
+
     private val vz = Vector(0.0, 0.0)
     private val v1 = Vector(1.0, 2.0)
     private val v2 = Vector(-2.0, 1.0)
+    private val subPath0 = SubPath()
+            .add(LineSegment(Directive.L, vz, v1))
+            .add(LineSegment(Directive.L, v1, v2))
 
     private val delta: Double = 1e-6
-
-    @Before
-    fun setup() {
-        subPath0.addSegment(LineSegment(Directive.L, vz, v1))
-        subPath0.addSegment(LineSegment(Directive.L, v1, v2))
-    }
 
     @Test
     fun boundingRect() {
@@ -44,5 +41,19 @@ class SubPathTest {
         assertEquals(v2, rSubPath.startPoint)
         assertEquals(vz, rSubPath.endPoint)
         assertEquals(-2.5, rSubPath.area, delta)
+    }
+
+    @Test
+    fun equals() {
+        assertEquals(SubPath(), emptySubPath)
+        assertNotEquals(emptySubPath, subPath0)
+
+        val subPath = SubPath()
+                .add(LineSegment(Directive.L, vz, v1))
+                .add(LineSegment(Directive.L, v1, v2))
+        assertEquals(subPath, subPath0)
+
+        subPath.close()
+        assertNotEquals(subPath, subPath0)
     }
 }
