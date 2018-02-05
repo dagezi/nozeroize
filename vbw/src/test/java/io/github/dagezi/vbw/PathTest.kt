@@ -22,15 +22,15 @@ class PathTest {
 
         return if (isCw) {
             SubPath()
-                    .add(LineSegment(Directive.H, p0, p1))
-                    .add(LineSegment(Directive.H, p1, p2))
-                    .add(LineSegment(Directive.H, p2, p3))
+                    .add(LineSegment(p0, p1))
+                    .add(LineSegment(p1, p2))
+                    .add(LineSegment(p2, p3))
                     .close()
         } else {
             SubPath()
-                    .add(LineSegment(Directive.H, p0, p3))
-                    .add(LineSegment(Directive.H, p3, p2))
-                    .add(LineSegment(Directive.H, p2, p1))
+                    .add(LineSegment(p0, p3))
+                    .add(LineSegment(p3, p2))
+                    .add(LineSegment(p2, p1))
                     .close()
         }
     }

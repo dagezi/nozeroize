@@ -23,24 +23,30 @@ abstract class Segment() {
 }
 
 data class LineSegment(
-        override val dir: Directive,
         override val start: Vector,
-        override val end: Vector)
+        override val end: Vector,
+        override val dir: Directive = Directive.L)
     : Segment() {
     override fun reversed(): Segment =
-            LineSegment(dir, end, start)
+            LineSegment(end, start, dir)
 
-    override fun toPathData(): String = String.format("L%f,%f ", end.x, end.y)
+    override fun toPathData(): String =
+            when (dir) {
+                Directive.Z -> "Z "
+                Directive.H -> String.format("H %f ", end.x)
+                Directive.V -> String.format("V %f ", end.y)
+                else -> String.format("L%f,%f ", end.x, end.y)
+            }
 }
 
 data class QuadraticCurveSegment(
-        override val dir: Directive,
         override val start: Vector,
         override val end: Vector,
-        val c0: Vector)
+        val c0: Vector,
+        override val dir: Directive = Directive.Q)
     : Segment() {
     override fun reversed(): Segment =
-            QuadraticCurveSegment(dir, end, start, c0)
+            QuadraticCurveSegment(end, start, c0, dir)
 
     override fun toPathData(): String =
             String.format("Q%f,%f %f,%f ", c0.x, c0.y, end.x, end.y)
@@ -49,14 +55,14 @@ data class QuadraticCurveSegment(
 }
 
 data class CubicCurveSegment(
-        override val dir: Directive,
         override val start: Vector,
         override val end: Vector,
         val c0: Vector,
-        val c1: Vector)
+        val c1: Vector,
+        override val dir: Directive = Directive.C)
     : Segment() {
     override fun reversed(): Segment =
-            CubicCurveSegment(dir, end, start, c1, c0)
+            CubicCurveSegment(end, start, c1, c0, dir)
 
     override fun toPathData(): String =
             String.format("C%f,%f %f,%f %f,%f", c0.x, c0.y, c1.x, c1.y, end.x, end.y)
@@ -67,16 +73,16 @@ data class CubicCurveSegment(
 fun Boolean.toInt() = if (this) 1 else 0
 
 data class ArcSegment(
-        override val dir: Directive,
         override val start: Vector,
         override val end: Vector,
         val radius: Vector,
         val rotation: Double,
         val largeArc: Boolean,
-        val sweep: Boolean)
+        val sweep: Boolean,
+        override val dir: Directive = Directive.A)
     : Segment() {
     override fun reversed(): Segment =
-            ArcSegment(dir, end, start, radius, rotation, largeArc, !sweep)
+            ArcSegment(end, start, radius, rotation, largeArc, !sweep, dir)
 
     override fun toPathData(): String =
             String.format("A%f,%f %f,%d,%d %f,%f", radius.x, radius.y,

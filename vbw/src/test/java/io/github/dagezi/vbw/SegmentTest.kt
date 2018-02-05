@@ -8,7 +8,7 @@ class LineSegmentTest {
     private val z = Vector(0.0, 0.0)
     private val v0 = Vector(1.0, 2.0)
     private val v1 = Vector( 3.0, 1.0)
-    private val seg = LineSegment(Directive.L, v0, v1)
+    private val seg = LineSegment(v0, v1, Directive.L)
 
     private val delta = 1e-6
 
@@ -34,10 +34,10 @@ class LineSegmentTest {
 
     @Test
     fun equals() {
-        val seg1 = LineSegment(Directive.L, v0, v1)
+        val seg1 = LineSegment(v0, v1, Directive.L)
         assertEquals(seg, seg1)
 
-        val seg2 = LineSegment(Directive.L, v0, z)
+        val seg2 = LineSegment(v0, z, Directive.L)
         assertNotEquals(seg, seg2)
         assertNotEquals(seg1, seg2)
     }

@@ -24,7 +24,7 @@ class SubPath: Shape() {
     fun close() : SubPath {
         if (!segments.isEmpty()) {
             if (startPoint != endPoint) {
-                add(LineSegment(Directive.Z, endPoint, startPoint))
+                add(LineSegment(endPoint, startPoint, Directive.Z))
             }
         }
         return this
@@ -40,12 +40,6 @@ class SubPath: Shape() {
         segments.forEach({newSubPath.add(it.reversed())})
         newSubPath.segments.reverse()
         return newSubPath
-    }
-
-    fun toPathData() : String {
-        var b = StringBuilder()
-        segments.joinTo(b, separator = "", transform = {it.toPathData()})
-        return b.toString()
     }
 
     override fun equals(other: Any?): Boolean =
