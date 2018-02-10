@@ -9,6 +9,9 @@ class Path : Shape() {
     override val area: Double
         get() = subPaths.sumByDouble { it.area }
 
+    val size: Int
+        get() = subPaths.size
+
     fun add(subPath: SubPath) : Path {
         subPaths.add(subPath)
         return this
