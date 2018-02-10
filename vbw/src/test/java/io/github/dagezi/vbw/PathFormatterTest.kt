@@ -49,10 +49,10 @@ class PathFormatterTest {
     fun manySubPaths() {
         var path = Path()
                 .add(SubPath()
-                        .add(ArcSegment(v0, v1, Vector(10.0, 20.0), 120.0, true, true))
+                        .add(ArcSegment(v0, v1, Vector(100.0, 200.0), 120.0, true, true))
                         .close())
                 .add(SubPath()
-                        .add(LineSegment(v1, v2))
+                        .add(LineSegment(v2, v1))
                         .close())
         assertEquals(path, creater.parse(formatter.format(path)))
     }
