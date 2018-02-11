@@ -1,0 +1,15 @@
+apply plugin: 'application'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(":vbw")
+}
+
+run {
+    if (project.hasProperty("appArgs")) {
+        args Eval.me(appArgs)
+    }
+}
+
+mainClassName = 'io.github.dagezi.vbw.Cmd'
+

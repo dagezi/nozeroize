@@ -1,2 +1,2 @@
-include ':vbw'
+include ':vbw', ':cmd'
 

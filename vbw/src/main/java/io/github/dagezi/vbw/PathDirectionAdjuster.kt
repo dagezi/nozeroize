@@ -36,5 +36,17 @@ class PathDirectionAdjuster(val path: Path) {
             adjustSubTree(newPath, it, -expectedAreaSign)
         }
     }
+
+    private fun dump(builder: StringBuilder, subTree: SpatialTree, level: Int): StringBuilder =
+        with(builder) {
+            append(" ".repeat(level * 2))
+            append("${subTree.shape.area}: ${subTree.shape.boundingRect}")
+            append('\n')
+            subTree.getChildren().forEach {dump(this, it, level + 1)}
+            this
+        }
+
+    fun dump(builder: StringBuilder): StringBuilder =
+            dump(builder, tree, 0)
 }
 
