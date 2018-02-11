@@ -3,6 +3,7 @@ apply plugin: 'application'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":vbw")
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
 }
 
 run {
