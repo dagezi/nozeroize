@@ -1,2 +1,2 @@
-include ':vbw', ':cmd', ':plugin'
+include ':nonzeroize', ':cmd', ':plugin'
 

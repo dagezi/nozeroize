@@ -8,7 +8,7 @@ dependencies {
 
     implementation 'com.android.tools.build:gradle:3.0.1'
     implementation group: 'batik', name: 'batik-parser', version: '1.6-1'
-    implementation project(":vbw")
+    implementation project(":nonzeroize")
 }
 
 buildscript {

@@ -2,7 +2,7 @@ apply plugin: 'application'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":vbw")
+    implementation project(":nonzeroize")
     implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
 }
 
@@ -12,5 +12,5 @@ run {
     }
 }
 
-mainClassName = 'io.github.dagezi.vbw.Cmd'
+mainClassName = 'io.github.dagezi.nonzeroize.Cmd'
 
