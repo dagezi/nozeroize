@@ -1,2 +1,2 @@
-include ':vbw', ':cmd'
+include ':vbw', ':cmd', ':plugin'
 
